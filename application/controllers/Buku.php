@@ -17,7 +17,7 @@ class Buku extends CI_Controller
         $data['kategori'] = $this->ModelBuku->getKategori()->result_array();
       
         $this->form_validation->set_rules('kategori', 'Kategori', 'required', [
-            'required' => 'Judul Buku harus diisi'
+            'required' => 'Kategori Buku harus diisi'
         ]);
  
         if ($this->form_validation->run() == false) {
@@ -28,7 +28,7 @@ class Buku extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $data = [
-                'kategori' => $this->input->post('kategori')
+                'kategori' => $this->input->post('kategori', TRUE)
             ];
  
            $this->ModelBuku->simpanKategori($data);
@@ -42,3 +42,35 @@ class Buku extends CI_Controller
         $this->ModelBuku->hapusKategori($where);
         redirect('buku/kategori');
     }
+
+    public function ubahKategori()
+    {
+        $data['judul']= 'Ubah Data Kategori';
+        $data['user']= $this->ModelUser->cekData(['email'=> $this-> session->userdata('email')])->row_array();
+        $data['kategori']= $this->ModeBuku->kategoriWhere(['id'=> $this->url->segment(3)])->result_array();
+
+
+        $this->form_validation->set_rules('kategori','Nama Kategori','required|min_length[3]',[
+            'required'=>'Nama Kategori Harus Diisi',
+            'min_lenght'=> 'Nama Kategori terlalu Pendek'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header',$data);
+            $this->load->view('templates/sidebar',$data);
+            $this->load->view('templates/topbar',$data);
+            $this->load->view('templates/ubah_kategori',$data);
+            $this->load->view('templates/footer');
+        } else {
+
+            $data = [
+                'kategori' => $this->input->post('kategori', true)
+            ];
+
+            $this->ModelBuku->updateKategori(['id'=> $this->input->post('id')], $data);
+            redirect('buku/kategori');
+        }
+    }
+    
+    
+}
