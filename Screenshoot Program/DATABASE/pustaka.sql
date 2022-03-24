@@ -160,10 +160,10 @@ INSERT INTO `role` (`id`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tempt`
+-- Table structure for table `temp`
 --
 
-CREATE TABLE `tempt` (
+CREATE TABLE `temp` (
   `id` int(11) NOT NULL,
   `tgl_booking` datetime DEFAULT NULL,
   `id_user` varchar(12) NOT NULL,
@@ -241,9 +241,9 @@ ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tempt`
+-- Indexes for table `temp`
 --
-ALTER TABLE `tempt`
+ALTER TABLE `temp`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -281,9 +281,9 @@ ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tempt`
+-- AUTO_INCREMENT for table `temp`
 --
-ALTER TABLE `tempt`
+ALTER TABLE `temp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
